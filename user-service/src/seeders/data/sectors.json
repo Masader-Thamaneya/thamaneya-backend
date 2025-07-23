@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Finance",
+    "description": "Businesses involved in banking, investing, and managing money."
+  },
+  {
+    "name": "Healthcare",
+    "description": "Organizations providing medical services, manufacturing medical equipment, or developing pharmaceuticals."
+  },
+  {
+    "name": "Technology",
+    "description": "Companies focused on software, hardware, and digital services."
+  },
+  {
+    "name": "Education",
+    "description": "Institutions and services offering teaching, training, and learning."
+  },
+  {
+    "name": "Retail",
+    "description": "Businesses that sell consumer goods and services directly to customers."
+  },
+  {
+    "name": "Manufacturing",
+    "description": "Companies involved in producing goods from raw materials."
+  },
+  {
+    "name": "Transportation",
+    "description": "Industries providing travel and freight services."
+  },
+  {
+    "name": "Energy",
+    "description": "Sectors related to the production and distribution of energy, including oil, gas, and renewables."
+  },
+  {
+    "name": "Hospitality",
+    "description": "Businesses focused on lodging, food service, and tourism."
+  },
+  {
+    "name": "Agriculture",
+    "description": "Firms engaged in farming, forestry, and food production."
+  }
+]
