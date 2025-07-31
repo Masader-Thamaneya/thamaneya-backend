@@ -1,30 +1,45 @@
 const ROUTES = [
   {
-    url: "/auth",
+    url: "/api/auth",
     auth: false,
     rateLimit: {
       windowMs: 15 * 60 * 1000,
       max: 5,
     },
     proxy: {
-      target: "https://www.google.com",
+      target: "http://user-service:3001",
       changeOrigin: true,
       pathRewrite: {
-        [`^/free`]: "",
+        [`^/api`]: "",
       },
     },
   },
   {
-    url: "/premium",
-    auth: true,
+    url: "/api/companies",
+    auth: false,
+    rateLimit: {
+      windowMs: 15 * 60 * 1000,
+      max: 5,
+    },
     proxy: {
-      target: "https://www.google.com",
+      target: "http://user-service:3001",
       changeOrigin: true,
       pathRewrite: {
-        [`^/premium`]: "",
+        [`^/api`]: "",
+      },
+    },
+  },
+  {
+    url: "/api/cfp",
+    auth: true,
+    proxy: {
+      target: "http://cfp-service:3002",
+      changeOrigin: true,
+      pathRewrite: {
+        [`^/api`]: "",
       },
     },
   },
 ];
 
-exports.ROUTES = ROUTES;
+export default ROUTES;

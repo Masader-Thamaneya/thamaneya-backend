@@ -1,7 +1,5 @@
 "use strict";
 import { Model, Sequelize, DataTypes } from "sequelize";
-import { Sector } from "./sector.model";
-import { Country } from "./country.model";
 
 interface CompanyAttributes {
   id?: number;
@@ -39,8 +37,6 @@ export class Company
   description?: string;
   manufacturing_process?: string;
   is_seeded?: boolean;
-
-  sector?: Sector;
 
   static associate(models: any) {
     Company.hasMany(models.User, {
