@@ -32,8 +32,8 @@ The collection includes:
 
 If the dev tunnel is not working or you're developing locally, you can run the project using Docker:
 
-1- download doker desktop
-2- clone th eproject locally
-3- run this command in the root of the project
-docker compose up --build
-4- test on localhost:3000/api
+- download doker desktop
+- clone the project's development branch locally
+- run this command in the root of the project
+  docker compose up --build
+- test on localhost:3000/api
