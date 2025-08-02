@@ -1,5 +1,6 @@
-import User from "../repositories/user.repository";
 import Company from "../repositories/company.repository";
+import User from "../repositories/user.repository";
+
 import {
   ConflictError,
   NotFoundError,
@@ -23,9 +24,14 @@ class CompanyService {
     return company.get({ plain: true });
   }
 
-  static async createCompany(data: CompanyCreationAttributes) {
+  static async createCompany(data: CompanyCreationAttributes, userId: string) {
     const company = await Company.createCompany(data);
-
+    const user = await User.findUserById(userId);
+    if (!user) {
+      return;
+    }
+    user.companyId = company.getDataValue("id");
+    await user.save();
     const companyData = company.get({ plain: true });
 
     return companyData.id;

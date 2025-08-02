@@ -29,7 +29,7 @@ class UserRepository {
     return await User.findOne({ where: { email } });
   }
 
-  static async findUserById(id: number) {
+  static async findUserById(id: string) {
     return await User.findByPk(id);
   }
 }

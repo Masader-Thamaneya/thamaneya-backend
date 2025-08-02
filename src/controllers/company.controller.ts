@@ -22,12 +22,10 @@ class CompanyController {
     }
   }
   static async createCompany(req: Request, res: Response, next: NextFunction) {
+    const { userId } = req.user!;
+    const data = req.body.company;
     try {
-      const userId = req.user?.userId;
-      if (!userId) {
-      }
-      const data = req.body.company;
-      const id = await CompanyService.createCompany(data);
+      const id = await CompanyService.createCompany(data, userId);
 
       return res.status(200).json({
         success: true,
