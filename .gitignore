@@ -1,23 +1,20 @@
-# Node.js dependencies
-**/node_modules/
+node_modules/
 
 # Logs
-**/*.log
+*.log
+logs/
 
 # Environment variables
-**/.env
+.env
 
-# Build outputs
-**/dist/
-**/build/
-
-# Coverage reports
-**/coverage/
-
-# IDE settings
-.vscode/
-.idea/
+# Build output
+dist/
+build/
 
 # OS files
 .DS_Store
 Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
