@@ -5,6 +5,7 @@ import { attachRefreshToken, deleteRefreshToken } from "../utils/createCookies";
 
 class AuthController {
   static async login(req: Request, res: Response, next: NextFunction) {
+    console.log(req.body);
     const { email, password } = req.body.user;
     try {
       const { accessToken, refreshToken } = await AuthService.login(
