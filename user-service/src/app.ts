@@ -5,6 +5,10 @@ import { authenticate } from "./middlewares/auth";
 
 import { errorHandler } from "./middlewares/errorHandler";
 
+app.post("/", (req, res) => {
+  res.send("Hello from root post");
+});
+
 app.get("/test", (req, res) => {
   res.status(200).json({
     success: true,

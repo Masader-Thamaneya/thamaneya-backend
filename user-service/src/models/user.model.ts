@@ -4,20 +4,25 @@ import { Company } from "./company.model";
 import bcrypt from "bcrypt";
 
 interface UserAttributes {
-  id?: number;
+  id?: string;
   name: string;
   email: string;
   passwordHash: string;
-  companyId?: number;
+  companyId?: string;
   role?: "admin" | "employee" | "manager";
   company?: any;
 }
 
-export class User extends Model<UserAttributes> implements UserAttributes {
+export type UserCreationAttributes = Omit<UserAttributes, "id">;
+
+export class User
+  extends Model<UserAttributes, UserCreationAttributes>
+  implements UserAttributes
+{
   name!: string;
   email!: string;
   passwordHash!: string;
-  companyId?: number;
+  companyId?: string;
   role?: "admin" | "employee" | "manager";
 
   company?: Company;
@@ -39,6 +44,11 @@ export class User extends Model<UserAttributes> implements UserAttributes {
 export default (sequelize: any, DataTypes: any) => {
   User.init(
     {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -57,7 +67,7 @@ export default (sequelize: any, DataTypes: any) => {
         field: "password_hash",
       },
       companyId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: true,
         field: "company_id",
       },

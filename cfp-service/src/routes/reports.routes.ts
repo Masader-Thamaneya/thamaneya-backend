@@ -8,9 +8,10 @@ router.post("/test", (req, res) => {
 });
 
 router.post("/", CarbonController.createReport);
+router.post("/:id/submit", CarbonController.submitReport);
 router.put("/:id", CarbonController.updateReport);
 router.get("/:id", CarbonController.getReport);
-/* router.post("/:id/submit", CarbonController.submitReport);
+/* ;
 
 router.get("/", CarbonController.getCompanyReports);
 router.get("/:id", CarbonController.getReport); */

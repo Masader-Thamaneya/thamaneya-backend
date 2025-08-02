@@ -1,20 +1,56 @@
 version: "3.8"
 
 services:
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+    networks:
+      - app-network
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
   api-gateway:
     build: ./api-gateway
     ports:
       - "3000:3000"
     depends_on:
       - user-service
-      - order-service
+      - cfp-service
+    volumes:
+      - ./api-gateway:/app
+      - /app/node_modules
+    networks:
+      - app-network
 
   user-service:
     build: ./user-service
     ports:
       - "3001:3001"
+    depends_on:
+      - mysql
+    volumes:
+      - ./user-service:/app
+      - /app/node_modules
+    networks:
+      - app-network
+    command: sh -c "/wait-for.sh mysql npm run setup && npm run dev"
 
   cfp-service:
     build: ./cfp-service
     ports:
       - "3002:3002"
+    depends_on:
+      - mysql
+    volumes:
+      - ./cfp-service:/app
+      - /app/node_modules
+    networks:
+      - app-network
+    command: sh -c "/wait-for.sh mysql npm run setup && npm run dev"
+
+networks:
+  app-network:
+    driver: bridge

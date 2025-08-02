@@ -58,6 +58,15 @@ module.exports = {
         allowNull: true,
       },
 
+      purchased_electricity: {
+        type: Sequelize.FLOAT,
+        allowNull: true,
+      },
+      purchased_chilled_water: {
+        type: Sequelize.FLOAT,
+        allowNull: true,
+      },
+
       scope_1_emissions: {
         type: Sequelize.FLOAT,
         allowNull: true,

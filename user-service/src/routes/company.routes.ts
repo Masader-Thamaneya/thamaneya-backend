@@ -1,4 +1,6 @@
 import CompanyController from "../controllers/company.controller";
+import CountryController from "../controllers/country.controller";
+import SectorController from "../controllers/sector.controller";
 
 import validateBody from "../middlewares/validateBody";
 
@@ -18,7 +20,11 @@ router.post(
 );
 
 router.get("/search", CompanyController.searchCompany);
+router.get("/countries", CountryController.getCountries);
+router.get("/sectors", SectorController.getSectors);
+
 router.get("/:id", CompanyController.getCompany);
+
 router.put(
   "/:id",
   validateBody(updateCompanyValidator, false),

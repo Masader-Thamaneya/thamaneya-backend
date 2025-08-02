@@ -10,7 +10,7 @@ import { CompanyCreationAttributes } from "../models/company.model";
 import { combineTableNames } from "sequelize/types/utils";
 
 class CompanyService {
-  static async getCompany(id: number) {
+  static async getCompany(id: string) {
     if (!id) {
       throw new BadRequestError("Company ID is required.");
     }
@@ -32,7 +32,7 @@ class CompanyService {
   }
 
   static async updateCompany(
-    id: number,
+    id: string,
     updates: Partial<CompanyCreationAttributes>
   ) {
     const newCompany = await Company.update(id, updates);

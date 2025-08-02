@@ -6,10 +6,10 @@ const accessSecretKey = process.env.ACCESS_SECRET;
 const refreshSecretKey = process.env.REFRESH_SECRET;
 
 type JwtPayload = {
-  id: number;
+  id: string;
   email: string;
   role: "admin" | "employee" | "manager";
-  companyId: number;
+  companyId: string;
 };
 
 if (!accessSecretKey || !refreshSecretKey) {

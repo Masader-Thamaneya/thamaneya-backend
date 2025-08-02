@@ -1,6 +1,7 @@
 import Report from "../repositories/report.repository";
 import Generator from "../repositories/generator.repository";
 import FuelEmissionFactor from "../repositories/emissionFactor.repository";
+import GoodEmissionFactor from "../repositories/goodEmissionFactor.repository";
 import RefrigerantEmissionFactor from "../repositories/refrigerantEmissionFactor.repository";
 
 import {
@@ -95,15 +96,55 @@ class ReportsService {
     return plainReport;
   }
 
-  static async cat1Emissions(reportId: string) {
-    let totalEmissions = 0;
-    totalEmissions = await updateGeneratorEmissions(reportId);
-    totalEmissions += await updateRefrigerantsEmissions(reportId);
+  static async submitReport(reportId: string) {
+    const report = await Report.findById(reportId);
+    if (!report) throw new NotFoundError("Report not found");
 
-    return totalEmissions;
+    const scope1 = await scope1Emissions(reportId);
+    const scope2 = await scope2Emissions(reportId);
+
+    const s1_s2 = scope1 + scope2;
+    report.scope_1_emissions = scope1;
+    report.scope_2_emissions = scope2;
+
+    report.s1_s2_emissions = s1_s2;
+    report.s1_s2_per_area = s1_s2 / report.area!;
+    report.s1_s2_per_employee = s1_s2 / report.number_of_employees!;
+    report.s1_s2_per_revenue = s1_s2 / report.revenue!;
+
+    await report.save();
   }
 }
 export default ReportsService;
+
+const scope1Emissions = async (reportId: string) => {
+  let totalEmissions = 0;
+  totalEmissions = await updateGeneratorEmissions(reportId);
+  totalEmissions += await updateRefrigerantsEmissions(reportId);
+
+  return totalEmissions;
+};
+
+const scope2Emissions = async (reportId: string) => {
+  const report = await Report.findById(reportId);
+  if (!report) throw new NotFoundError("Report not found");
+
+  const purchased_electricity = report.purchased_electricity || 0;
+  const purchased_chilled_water = report.purchased_chilled_water || 0;
+
+  const total_electricity = purchased_chilled_water + purchased_electricity;
+
+  const factor = await GoodEmissionFactor.find({
+    good_id: 1,
+    unit_id: 10,
+    year: report.reporting_year,
+  });
+
+  if (!factor) {
+    throw new Error(`No emission factor found for `);
+  }
+  return total_electricity * factor.ef;
+};
 
 const updateGeneratorEmissions = async (reportId: string) => {
   const report = await Report.findById(reportId);
@@ -127,7 +168,7 @@ const updateGeneratorEmissions = async (reportId: string) => {
 
       const factor = await FuelEmissionFactor.find({
         fuel_id,
-        unit_id: 2,
+        unit_id: 3,
         year: report.reporting_year,
       });
 

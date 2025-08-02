@@ -60,6 +60,22 @@ class ReportsController {
     }
   }
 
+  static async submitReport(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+    const { userId, companyId } = req.user!; // TODO: change to req.user
+    const { data } = req.body;
+    try {
+      let totalEmissions = 0;
+      await ReportService.submitReport(id);
+
+      return res.status(200).json({
+        success: true,
+        message: "Report was submitted successfully.",
+      });
+    } catch (err: any) {
+      next(err);
+    }
+  }
   /* 
   static async submitReport(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;

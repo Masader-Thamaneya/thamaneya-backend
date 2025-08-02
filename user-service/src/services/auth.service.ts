@@ -4,6 +4,7 @@ import { authenticateRefreshToken, createAccessToken } from "../utils/jwt";
 import { generateOtp } from "../utils/otp";
 import { generateTokens } from "../utils/jwt";
 import {
+  BaseError,
   ConflictError,
   NotFoundError,
   BadRequestError,

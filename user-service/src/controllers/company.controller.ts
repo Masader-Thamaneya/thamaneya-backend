@@ -1,17 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 
-import db from "../models";
-import { Company as CompanyType } from "../models/company.model";
-import { Sector as SectorType } from "../models/sector.model";
-
 import CompanyRepository from "../repositories/company.repository";
 
 import CompanyService from "../services/company.service";
-
-import { authenticateAccessToken } from "../utils/jwt";
-
-const Company = db.Company as typeof CompanyType;
-const Sector = db.Sector as typeof SectorType;
 
 class CompanyController {
   static async getCompany(req: Request, res: Response, next: NextFunction) {
@@ -19,7 +10,7 @@ class CompanyController {
       const user = req.user!;
       const { id } = req.params;
 
-      const company = await CompanyService.getCompany(parseInt(id));
+      const company = await CompanyService.getCompany(id);
 
       return res.status(200).json({
         success: true,
@@ -53,7 +44,7 @@ class CompanyController {
       const { id } = req.params;
       const updates = req.body.company;
 
-      await CompanyService.updateCompany(parseInt(id), updates);
+      await CompanyService.updateCompany(id, updates);
 
       return res.status(200).json({
         success: true,

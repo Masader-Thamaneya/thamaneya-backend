@@ -16,6 +16,9 @@ interface ReportAttributes {
   reporting_year?: number;
   base_year?: number;
 
+  purchased_electricity?: number;
+  purchased_chilled_water?: number;
+
   scope_1_emissions?: number;
   scope_2_emissions?: number;
   scope_3_emissions?: number;
@@ -46,6 +49,9 @@ export class Report
   declare revenue_currency?: string;
   declare reporting_year?: number;
   declare base_year?: number;
+
+  declare purchased_electricity?: number;
+  declare purchased_chilled_water?: number;
 
   declare scope_1_emissions?: number;
   declare scope_2_emissions?: number;
@@ -157,6 +163,15 @@ export default (sequelize: Sequelize) => {
       },
       base_year: {
         type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+
+      purchased_electricity: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+      },
+      purchased_chilled_water: {
+        type: DataTypes.FLOAT,
         allowNull: true,
       },
 

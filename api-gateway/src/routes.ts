@@ -1,5 +1,16 @@
 const ROUTES = [
   {
+    url: "/api/test",
+    auth: false,
+    proxy: {
+      target: "http://user-service:3001",
+      changeOrigin: true,
+      pathRewrite: {
+        "^/": "test",
+      },
+    },
+  },
+  {
     url: "/api/auth",
     auth: false,
     rateLimit: {
@@ -10,7 +21,7 @@ const ROUTES = [
       target: "http://user-service:3001",
       changeOrigin: true,
       pathRewrite: {
-        [`^/api`]: "",
+        "^/": "auth/",
       },
     },
   },
@@ -25,7 +36,7 @@ const ROUTES = [
       target: "http://user-service:3001",
       changeOrigin: true,
       pathRewrite: {
-        [`^/api`]: "",
+        "^/": "companies/",
       },
     },
   },
@@ -36,7 +47,7 @@ const ROUTES = [
       target: "http://cfp-service:3002",
       changeOrigin: true,
       pathRewrite: {
-        [`^/api`]: "",
+        "^/": "cfp/",
       },
     },
   },

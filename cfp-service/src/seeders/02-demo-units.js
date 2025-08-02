@@ -1,10 +1,19 @@
 "use strict";
 
+const { symbol } = require("joi");
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     const units = [
       { name: "tonnes", name_ar: "أطنان", symbol: "t", symbol_ar: "ط" },
+      {
+        name: "toner",
+        name_ar: "خرطوشة حبر",
+        symbol: "toner",
+        symbol_ar: "خرطوشة",
+      },
+
       { name: "litres", name_ar: "لترات", symbol: "L", symbol_ar: "ل" },
       {
         name: "kWh (Net CV)",
@@ -30,6 +39,12 @@ module.exports = {
       },
       { name: "A3 Paper", name_ar: "ورق A3", symbol: "A3", symbol_ar: "A3" },
       { name: "A4 Paper", name_ar: "ورق A4", symbol: "A4", symbol_ar: "A4" },
+      {
+        name: "km per person",
+        name_ar: "كيلوميتر لكل شخص",
+        symbol: "p.km",
+        symbol_ar: "ش.كم",
+      },
     ];
 
     await queryInterface.bulkInsert("units", units);

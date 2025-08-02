@@ -22,7 +22,7 @@ class CompanyRepository {
     }
   }
 
-  static async findById(id: number) {
+  static async findById(id: string) {
     return Company.findByPk(id, {
       include: [
         { model: db.Sector as typeof Sector, as: "sector" },
@@ -32,7 +32,7 @@ class CompanyRepository {
     });
   }
 
-  static async update(id: number, updates: Partial<CompanyType>) {
+  static async update(id: string, updates: Partial<CompanyType>) {
     const company = await Company.findByPk(id);
     if (!company) return null;
     try {

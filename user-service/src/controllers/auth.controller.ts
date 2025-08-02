@@ -28,6 +28,7 @@ class AuthController {
 
   static async signup(req: Request, res: Response, next: NextFunction) {
     const { email, name, password } = req.body.user;
+    console.log(password);
     try {
       const otpExpiresAt = await AuthService.signup(email, name, password);
       return res.status(201).json({

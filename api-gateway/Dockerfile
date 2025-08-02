@@ -7,4 +7,5 @@ RUN npm install
 COPY . .
 RUN npx tsc
 
-CMD ["node", "dist/server.js"]
+CMD ["npm", "run", "dev"]
+# CMD ["node", "dist/server.js"]
