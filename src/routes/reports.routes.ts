@@ -8,6 +8,7 @@ router.post("/test", (req, res) => {
 });
 
 router.post("/", CarbonController.createReport);
+router.get("/refrigerants", CarbonController.getGases);
 router.post("/:id/submit", CarbonController.submitReport);
 router.put("/:id", CarbonController.updateReport);
 router.get("/:id", CarbonController.getReport);
