@@ -21,7 +21,7 @@ const ROUTES = [
       target: "http://user-service:3001",
       changeOrigin: true,
       pathRewrite: {
-        "^/": "/api/auth",
+        "^/": "/api/auth/",
       },
     },
   },
@@ -42,7 +42,7 @@ const ROUTES = [
   },
   {
     url: "/api/cfp",
-    auth: true,
+    auth: false,
     proxy: {
       target: "http://cfp-service:3002",
       changeOrigin: true,
