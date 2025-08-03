@@ -16,8 +16,8 @@ app.get("/test", (req, res) => {
   });
 });
 
-app.use("/auth", authRoutes);
-app.use("/companies", authenticate, companyRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/companies", authenticate, companyRoutes);
 
 app.use("/boards", (req, res) => {});
 app.use("/users", (req, res) => {});

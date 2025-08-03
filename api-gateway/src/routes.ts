@@ -5,9 +5,6 @@ const ROUTES = [
     proxy: {
       target: "http://user-service:3001",
       changeOrigin: true,
-      pathRewrite: {
-        "^/": "test",
-      },
     },
   },
   {
@@ -20,9 +17,6 @@ const ROUTES = [
     proxy: {
       target: "http://user-service:3001",
       changeOrigin: true,
-      pathRewrite: {
-        "^/": "auth/",
-      },
     },
   },
   {
@@ -35,9 +29,6 @@ const ROUTES = [
     proxy: {
       target: "http://user-service:3001",
       changeOrigin: true,
-      pathRewrite: {
-        "^/": "companies/",
-      },
     },
   },
   {
@@ -46,9 +37,6 @@ const ROUTES = [
     proxy: {
       target: "http://cfp-service:3002",
       changeOrigin: true,
-      pathRewrite: {
-        "^/": "cfp/",
-      },
     },
   },
 ];

@@ -5,6 +5,7 @@ import {
   NotFoundError,
   BadRequestError,
   GoneError,
+  UnauthorizedError,
 } from "../utils/errorMessages";
 import { CompanyCreationAttributes } from "../models/company.model";
 import { combineTableNames } from "sequelize/types/utils";
@@ -23,9 +24,14 @@ class CompanyService {
     return company.get({ plain: true });
   }
 
-  static async createCompany(data: CompanyCreationAttributes) {
+  static async createCompany(data: CompanyCreationAttributes, userId: string) {
     const company = await Company.createCompany(data);
-
+    const user = await User.findUserById(userId);
+    if (!user) {
+      throw new UnauthorizedError("User not found.");
+    }
+    user.companyId = company.getDataValue("id");
+    await user.save();
     const companyData = company.get({ plain: true });
 
     return companyData.id;

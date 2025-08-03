@@ -7,7 +7,7 @@ import { errorHandler } from "./middlewares/errorHandler";
 const app = express();
 app.use(express.json());
 
-app.use(authenticate, routes); // All routes prefixed with /api
+app.use("/api", authenticate, routes); // All routes prefixed with /api
 // app.use("/companies", authenticate, companyRoutes);
 
 app.use(errorHandler);

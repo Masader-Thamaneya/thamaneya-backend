@@ -6,7 +6,7 @@ const accessSecretKey = process.env.ACCESS_SECRET;
 const refreshSecretKey = process.env.REFRESH_SECRET;
 
 type JwtPayload = {
-  id: string;
+  userId: string;
   email: string;
   role: "admin" | "employee" | "manager";
   companyId: string;
@@ -38,6 +38,8 @@ export const authenticateRefreshToken = (token: string): JwtPayload => {
 
 export const generateTokens = (JwtPayload: JwtPayload) => {
   const accessToken = createAccessToken(JwtPayload);
+  console.log(JwtPayload);
+  console.log(accessToken);
   const refreshToken = createRefreshToken(JwtPayload);
 
   return { accessToken, refreshToken };

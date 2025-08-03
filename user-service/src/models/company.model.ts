@@ -2,7 +2,7 @@
 import { Model, Sequelize, DataTypes } from "sequelize";
 
 interface CompanyAttributes {
-  id?: number;
+  id?: string;
   name: string;
   sector_id?: number;
   primary_country_id?: number;
