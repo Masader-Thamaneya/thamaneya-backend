@@ -1,4 +1,5 @@
 import Report from "../repositories/report.repository";
+import Gas from "../repositories/gas.repository";
 import Generator from "../repositories/generator.repository";
 import FuelEmissionFactor from "../repositories/emissionFactor.repository";
 import GoodEmissionFactor from "../repositories/goodEmissionFactor.repository";
@@ -10,6 +11,7 @@ import {
   BadRequestError,
   GoneError,
   UnauthorizedError,
+  InternalServerError,
 } from "../utils/errorMessages";
 import { generateOtp } from "../utils/otp";
 import { RefrigerantUsage } from "../models/refrigerantUsage.model";
@@ -113,6 +115,15 @@ class ReportsService {
     report.s1_s2_per_revenue = s1_s2 / report.revenue!;
 
     await report.save();
+  }
+
+  static async getGases() {
+    const gases = await Gas.getAll();
+
+    if (!gases || gases.length == 0) {
+      throw new InternalServerError("No gases are found.");
+    }
+    return gases;
   }
 }
 export default ReportsService;

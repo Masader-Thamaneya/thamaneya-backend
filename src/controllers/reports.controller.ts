@@ -76,6 +76,21 @@ class ReportsController {
       next(err);
     }
   }
+
+  static async getGases(req: Request, res: Response, next: NextFunction) {
+    try {
+      const gases = await ReportService.getGases();
+      return res.status(200).json({
+        success: true,
+        message: "Gases were retreived successfully.",
+        data: {
+          gases,
+        },
+      });
+    } catch (err: any) {
+      next(err);
+    }
+  }
   /* 
   static async submitReport(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
