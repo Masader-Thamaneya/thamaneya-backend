@@ -8,6 +8,7 @@ interface ReportAttributes {
   company_id: string;
   created_by: string;
   status?: "draft" | "submitted" | "approved";
+  number_of_facilities?: number;
   area?: number;
   area_unit?: string;
   number_of_employees?: number;
@@ -42,6 +43,7 @@ export class Report
   declare company_id: string;
   declare created_by: string;
   declare status: "draft" | "submitted" | "approved";
+  declare number_of_facilities: number;
   declare area?: number;
   declare area_unit?: string;
   declare number_of_employees?: number;
@@ -136,6 +138,10 @@ export default (sequelize: Sequelize) => {
         type: DataTypes.ENUM("draft", "submitted", "approved"),
         allowNull: false,
         defaultValue: "draft",
+      },
+      number_of_facilities: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
       },
       area: {
         type: DataTypes.FLOAT,
