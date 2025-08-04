@@ -27,7 +27,7 @@ export class WasteEmissionFactor
   declare ef: number;
 
   static associate(models: any) {
-    WasteEmissionFactor.belongsTo(models.waste_types, {
+    WasteEmissionFactor.belongsTo(models.WasteType, {
       foreignKey: "waste_type_id",
       as: "waste",
     });

@@ -104,7 +104,7 @@ export class Report
       foreignKey: "report_id",
       as: "refrigerants",
     });
-    Report.hasMany(models.wasteUsage, {
+    Report.hasMany(models.WasteUsage, {
       foreignKey: "report_id",
       as: "wastes",
     });

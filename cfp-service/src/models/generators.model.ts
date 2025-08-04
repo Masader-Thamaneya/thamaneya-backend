@@ -2,7 +2,7 @@
 import { Model, Sequelize, DataTypes } from "sequelize";
 import { underscoredIf } from "sequelize/types/utils";
 
-interface GeneratorAttributes {
+export interface GeneratorAttributes {
   id?: number;
   report_id: string;
   year: number;
@@ -80,7 +80,7 @@ export default (sequelize: Sequelize) => {
       underscored: true,
       indexes: [
         {
-          fields: ["reports_id"],
+          fields: ["report_id"],
         },
         {
           unique: true,
