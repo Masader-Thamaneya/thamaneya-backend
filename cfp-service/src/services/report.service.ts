@@ -131,7 +131,7 @@ class ReportsService {
     );
     const cat_1_emissions = await cat1Emissions(report);
     const cat_3_emissions = category_3_emissions + WTT_emissions;
-    const cat_5_emissions = await cat1Emissions(report);
+    const cat_5_emissions = await cat5Emissions(report);
     const cat_7_emissions = await cat7Emissions(report);
 
     const scope_3_emissions =
