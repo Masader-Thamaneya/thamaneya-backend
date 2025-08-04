@@ -2,12 +2,20 @@
 import { Model, Sequelize, DataTypes } from "sequelize";
 import { Generator } from "./generators.model";
 import { RefrigerantUsage } from "./refrigerantUsage.model";
+import { WasteUsage } from "./wasteUsage.model";
 
 interface ReportAttributes {
   id?: string;
   company_id: string;
   created_by: string;
-  status?: "draft" | "submitted" | "approved";
+  status?:
+    | "draft"
+    | "unverified"
+    | "submitted"
+    | "verified"
+    | "revision_required"
+    | "archived";
+  number_of_facilities?: number;
   area?: number;
   area_unit?: string;
   number_of_employees?: number;
@@ -19,14 +27,19 @@ interface ReportAttributes {
   purchased_electricity?: number;
   purchased_chilled_water?: number;
 
+  A3_paper_consumption?: number;
+  A4_paper_consumption?: number;
+  water_consumption?: number;
+
   scope_1_emissions?: number;
   scope_2_emissions?: number;
   scope_3_emissions?: number;
-  total_emissions?: number;
   cat_1_emissions?: number;
   cat_3_emissions?: number;
   cat_5_emissions?: number;
+  cat_7_emissions?: number;
 
+  total_emissions?: number;
   s1_s2_emissions?: number;
   s1_s2_per_employee?: number;
   s1_s2_per_area?: number;
@@ -41,7 +54,14 @@ export class Report
 {
   declare company_id: string;
   declare created_by: string;
-  declare status: "draft" | "submitted" | "approved";
+  declare status:
+    | "draft"
+    | "unverified"
+    | "submitted"
+    | "verified"
+    | "revision_required"
+    | "archived";
+  declare number_of_facilities?: number;
   declare area?: number;
   declare area_unit?: string;
   declare number_of_employees?: number;
@@ -53,14 +73,19 @@ export class Report
   declare purchased_electricity?: number;
   declare purchased_chilled_water?: number;
 
+  declare A3_paper_consumption?: number;
+  declare A4_paper_consumption?: number;
+  declare water_consumption?: number;
+
   declare scope_1_emissions?: number;
   declare scope_2_emissions?: number;
   declare scope_3_emissions?: number;
-  declare total_emissions?: number;
   declare cat_1_emissions?: number;
   declare cat_3_emissions?: number;
   declare cat_5_emissions?: number;
+  declare cat_7_emissions?: number;
 
+  declare total_emissions?: number;
   declare s1_s2_emissions?: number;
   declare s1_s2_per_employee?: number;
   declare s1_s2_per_area?: number;
@@ -68,6 +93,7 @@ export class Report
 
   declare generators?: Generator[];
   declare refrigerants?: RefrigerantUsage[];
+  declare wastes?: WasteUsage[];
 
   static associate(models: any) {
     Report.hasMany(models.Generator, {
@@ -77,6 +103,10 @@ export class Report
     Report.hasMany(models.RefrigerantUsage, {
       foreignKey: "report_id",
       as: "refrigerants",
+    });
+    Report.hasMany(models.wasteUsage, {
+      foreignKey: "report_id",
+      as: "wastes",
     });
     // Report.hasMany(models.Fuel, {
     //   foreignKey: "fuel_id",
@@ -133,9 +163,20 @@ export default (sequelize: Sequelize) => {
         allowNull: false,
       },
       status: {
-        type: DataTypes.ENUM("draft", "submitted", "approved"),
+        type: DataTypes.ENUM(
+          "draft",
+          "unverified",
+          "submitted",
+          "verified",
+          "revision_required",
+          "archived"
+        ),
         allowNull: false,
         defaultValue: "draft",
+      },
+      number_of_facilities: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
       },
       area: {
         type: DataTypes.FLOAT,
@@ -175,6 +216,19 @@ export default (sequelize: Sequelize) => {
         allowNull: true,
       },
 
+      A3_paper_consumption: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      A4_paper_consumption: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      water_consumption: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+      },
+
       scope_1_emissions: {
         type: DataTypes.FLOAT,
         allowNull: true,
@@ -184,10 +238,6 @@ export default (sequelize: Sequelize) => {
         allowNull: true,
       },
       scope_3_emissions: {
-        type: DataTypes.FLOAT,
-        allowNull: true,
-      },
-      total_emissions: {
         type: DataTypes.FLOAT,
         allowNull: true,
       },
@@ -203,7 +253,15 @@ export default (sequelize: Sequelize) => {
         type: DataTypes.FLOAT,
         allowNull: true,
       },
+      cat_7_emissions: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+      },
 
+      total_emissions: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+      },
       s1_s2_emissions: {
         type: DataTypes.FLOAT,
         allowNull: true,

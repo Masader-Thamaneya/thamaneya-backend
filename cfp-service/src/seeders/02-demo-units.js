@@ -45,6 +45,12 @@ module.exports = {
         symbol: "p.km",
         symbol_ar: "ش.كم",
       },
+      {
+        name: "employee",
+        name_ar: "موظف",
+        symbol: "employee",
+        symbol_ar: "موظف",
+      },
     ];
 
     await queryInterface.bulkInsert("units", units);

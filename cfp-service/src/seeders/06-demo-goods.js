@@ -5,6 +5,9 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("goods", [
       { name: "Electricity", name_ar: "كهرباء" },
+      { name: "Electricity (WTT)", name_ar: "كهرباء" },
+      { name: "Electricity (T&D)", name_ar: "كهرباء" },
+
       { name: "PV Generation", name_ar: "توليد كهربي ضوئي" },
       { name: "Water", name_ar: "مياه" },
       { name: "Wastewater treatment", name_ar: "معالجة مياه الصرف" },
@@ -28,6 +31,7 @@ module.exports = {
       },
       { name: "Average MC", name_ar: "دراجة نارية متوسطة" },
       { name: "Average MC (WTT)", name_ar: "دراجة نارية متوسطة (WTT)" },
+      { name: "Commuting", name_ar: "تنقلات الموظفين" },
     ]);
   },
 

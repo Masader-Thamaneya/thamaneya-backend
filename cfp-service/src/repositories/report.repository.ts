@@ -21,6 +21,7 @@ class ReportRepository {
       include: [
         { model: db.Generator, as: "generators" },
         { model: db.RefrigerantUsage, as: "refrigerants" },
+        { model: db.WasteUsage, as: "wastes" },
       ],
     });
   }

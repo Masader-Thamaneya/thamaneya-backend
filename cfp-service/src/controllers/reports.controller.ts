@@ -76,16 +76,31 @@ class ReportsController {
       next(err);
     }
   }
-  /* 
-  static async submitReport(req: Request, res: Response, next: NextFunction) {
-    const { id } = req.params;
-    const { userId, companyId } = req.body.user; // TODO: change to req.user
-    const { data } = req.body;
+
+  static async getGases(req: Request, res: Response, next: NextFunction) {
     try {
-      await ReportService.submitReport(id, userId, companyId, data);
+      const gases = await ReportService.getGases();
       return res.status(200).json({
         success: true,
-        message: "Report was submitted successfully.",
+        message: "Gases were retreived successfully.",
+        data: {
+          gases,
+        },
+      });
+    } catch (err: any) {
+      next(err);
+    }
+  }
+
+  static async getWastes(req: Request, res: Response, next: NextFunction) {
+    try {
+      const wastes = await ReportService.getWastes();
+      return res.status(200).json({
+        success: true,
+        message: "Wastes were retreived successfully.",
+        data: {
+          wastes,
+        },
       });
     } catch (err: any) {
       next(err);
@@ -97,7 +112,7 @@ class ReportsController {
     res: Response,
     next: NextFunction
   ) {
-    const { userId, companyId } = req.body.user; // TODO: change to req.user
+    const { userId, companyId } = req.user!;
     try {
       const reports = await ReportService.getCompanyReports(companyId);
       return res.status(200).json({
@@ -111,8 +126,6 @@ class ReportsController {
       next(err);
     }
   }
-
-   */
 }
 
 export default ReportsController;

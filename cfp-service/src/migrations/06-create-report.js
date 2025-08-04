@@ -29,6 +29,10 @@ module.exports = {
         allowNull: false,
         defaultValue: "draft",
       },
+      number_of_facilities: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
       area: {
         type: Sequelize.FLOAT,
         allowNull: true,
@@ -67,6 +71,19 @@ module.exports = {
         allowNull: true,
       },
 
+      A3_paper_consumption: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      A4_paper_consumption: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      water_consumption: {
+        type: Sequelize.FLOAT,
+        allowNull: true,
+      },
+
       scope_1_emissions: {
         type: Sequelize.FLOAT,
         allowNull: true,
@@ -76,10 +93,6 @@ module.exports = {
         allowNull: true,
       },
       scope_3_emissions: {
-        type: Sequelize.FLOAT,
-        allowNull: true,
-      },
-      total_emissions: {
         type: Sequelize.FLOAT,
         allowNull: true,
       },
@@ -95,7 +108,15 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: true,
       },
+      cat_7_emissions: {
+        type: Sequelize.FLOAT,
+        allowNull: true,
+      },
 
+      total_emissions: {
+        type: Sequelize.FLOAT,
+        allowNull: true,
+      },
       s1_s2_emissions: {
         type: Sequelize.FLOAT,
         allowNull: true,

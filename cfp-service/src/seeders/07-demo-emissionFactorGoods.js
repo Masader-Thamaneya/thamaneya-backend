@@ -17,10 +17,12 @@ module.exports = {
     // Define emission factors with symbols instead of hardcoded unit_ids
     const data = [
       { name: "Electricity", ef: 0.42635, symbol: "kWh" },
+      { name: "Electricity (T&D)", ef: 0.03210871, symbol: "kWh" },
+      { name: "Electricity (WTT)", ef: 0.07883159, symbol: "kWh" },
       { name: "PV Generation", ef: 0.42635, symbol: "kWh" },
-      { name: "Water", ef: 0.00015, symbol: "m³" },
-      { name: "Wastewater treatment", ef: 0.00003, symbol: "m³" },
-      { name: "Paper", ef: 0.9194, symbol: "t" },
+      { name: "Water", ef: 0.00035343, symbol: "m³" },
+      { name: "Wastewater treatment", ef: 0.00064518, symbol: "m³" },
+      { name: "Paper", ef: 1.33931834, symbol: "t" },
       { name: "Plastic", ef: 3.11629, symbol: "t" },
       { name: "Ink", ef: 0.0048, symbol: "toner" },
       { name: "Office waste", ef: 0.46705, symbol: "t" },
@@ -31,6 +33,7 @@ module.exports = {
       { name: "PT. Average bus (WTT)", ef: 0.00002, symbol: "p.km" },
       { name: "Average MC", ef: 0.00011, symbol: "p.km" },
       { name: "Average MC (WTT)", ef: 0.00003, symbol: "p.km" },
+      { name: "Commuting", ef: 1.3205104, symbol: "employee" },
     ];
 
     const year = 2024;
