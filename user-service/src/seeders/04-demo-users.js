@@ -1,5 +1,6 @@
 "use strict";
 const bcrypt = require("bcrypt");
+const { v4: uuidv4 } = require("uuid");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -8,7 +9,7 @@ module.exports = {
 
     await queryInterface.bulkInsert("users", [
       {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         name: "test user",
         email: "test@email.com",
         password_hash: hashedPassword,
@@ -18,7 +19,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         name: "Admin User",
         email: "admin@example.com",
         password_hash: hashedPassword,
@@ -28,7 +29,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         name: "Manager User",
         email: "manager@example.com",
         password_hash: hashedPassword,
@@ -38,7 +39,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         name: "Employee User",
         email: "employee@example.com",
         password_hash: hashedPassword,
