@@ -5,7 +5,7 @@ const { v4: uuidv4 } = require("uuid");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    const hashedPassword = await bcrypt.hash("password123", 10); // change as needed
+    const hashedPassword = await bcrypt.hash("Password123", 10); // change as needed
 
     await queryInterface.bulkInsert("users", [
       {
