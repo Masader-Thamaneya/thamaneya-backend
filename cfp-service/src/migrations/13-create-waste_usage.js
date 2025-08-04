@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false,
       },
       treatment: {
-        type: DataTypes.ENUM(
+        type: Sequelize.ENUM(
           "Recycled",
           "Combustion",
           "Composting",

@@ -40,7 +40,7 @@ export default (sequelize: Sequelize) => {
         unique: true,
       },
       treatments: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.JSON(),
         allowNull: false,
         defaultValue: [],
       },

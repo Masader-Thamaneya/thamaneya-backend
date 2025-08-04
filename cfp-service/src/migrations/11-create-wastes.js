@@ -20,7 +20,7 @@ module.exports = {
         unique: true,
       },
       treatments: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
+        type: Sequelize.JSON,
         allowNull: false,
         defaultValue: [],
       },

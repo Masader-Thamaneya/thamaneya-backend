@@ -208,7 +208,7 @@ module.exports = {
     const data = wasteTypes.map((wt) => ({
       name: wt.name,
       name_ar: wt.name_ar,
-      treatments: wt.treatments,
+      treatments: JSON.stringify(wt.treatments),
     }));
 
     await queryInterface.bulkInsert("waste_types", data);

@@ -113,16 +113,12 @@ module.exports = {
       ["Paper and board: paper", "Landfill", 1164.39015],
     ];
 
-    const now = new Date();
-
     const records = dataKg
       .map(([wasteName, treatment, efKg]) => ({
         waste_type_id: wasteTypeMap[wasteName],
         treatment,
         unit_id: unitId,
-        ef: parseFloat((efKg / 1000).toFixed(6)), // convert kgCO2e to mtCO2e
-        createdAt: now,
-        updatedAt: now,
+        ef: parseFloat((efKg / 1000).toFixed(6)),
       }))
       .filter((e) => e.waste_type_id); // only keep records with valid waste_type_id
 
