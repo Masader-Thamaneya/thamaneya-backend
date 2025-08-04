@@ -40,14 +40,14 @@ module.exports = {
       },
     });
 
-    await queryInterface.addIndex("waste_usage", ["report_id"]);
-    await queryInterface.addIndex("waste_usage", ["report_id", "waste_id"], {
+    await queryInterface.addIndex("waste_usages", ["report_id"]);
+    await queryInterface.addIndex("waste_usages", ["report_id", "waste_id"], {
       unique: true,
       name: "waste_usage_report_waste",
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("waste_usage");
+    await queryInterface.dropTable("waste_usages");
   },
 };
