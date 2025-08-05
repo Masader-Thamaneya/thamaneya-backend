@@ -2,6 +2,7 @@ import Report from "../repositories/report.repository";
 import Gas from "../repositories/gas.repository";
 import Generator from "../repositories/generator.repository";
 import Waste from "../repositories/waste.repository";
+import Paper from "../repositories/paper.repository";
 
 import FuelEmissionFactor from "../repositories/emissionFactor.repository";
 import GoodEmissionFactor from "../repositories/goodEmissionFactor.repository";
@@ -42,8 +43,6 @@ class ReportsService {
     companyId: string,
     reportData: any
   ) {
-    // const report = await Report.update(reportId, reportData);
-
     const report = await Report.findById(reportId);
 
     if (!report) {
@@ -96,6 +95,17 @@ class ReportsService {
       });
 
       await Waste.bulkCreate(wastes);
+    }
+
+    if (reportData.papers) {
+      const papers = reportData.papers.map((paper: any) => {
+        return {
+          report_id: reportId,
+          ...paper,
+        };
+      });
+
+      await Paper.bulkCreate(papers);
     }
 
     return;
@@ -236,7 +246,9 @@ const cat1Emissions = async (report: ReportType) => {
     A4_emissions = 0,
     water_emissions = 0;
 
-  if (report.A3_paper_consumption || report.A4_paper_consumption) {
+  if (report.papers && report.papers.length > 0) {
+    let A3_usage = 0,
+      A4_usage = 0;
     const paper_factor = await GoodEmissionFactor.find({
       good_id: 7,
       unit_id: 1,
@@ -246,11 +258,16 @@ const cat1Emissions = async (report: ReportType) => {
     if (!paper_factor) {
       throw new InternalServerError(`No emission factor found for paper`);
     }
-    const A3_usage = (report.A3_paper_consumption || 0) * (5 / (10 ^ 6));
-    const A4_usage = (report.A4_paper_consumption || 0) * (10 / (10 ^ 6));
+    report.papers.forEach((paper) => {
+      if (paper.type === "A3") {
+        A3_usage += paper.activity_data || 0;
+      } else if (paper.type === "A4") {
+        A4_usage += paper.activity_data || 0;
+      }
+    });
 
-    A3_emissions = A3_usage * paper_factor.ef;
-    A4_emissions = A4_usage * paper_factor.ef;
+    A3_emissions = A3_usage * (5 / (10 ^ 6)) * paper_factor.ef;
+    A4_emissions = A4_usage * (10 / (10 ^ 6)) * paper_factor.ef;
   }
 
   if (report.water_consumption) {

@@ -3,6 +3,7 @@ import { Model, Sequelize, DataTypes } from "sequelize";
 import { Generator } from "./generators.model";
 import { RefrigerantUsage } from "./refrigerantUsage.model";
 import { WasteUsage } from "./wasteUsage.model";
+import { PaperUsage } from "./paperUsage.model";
 
 interface ReportAttributes {
   id?: string;
@@ -27,8 +28,6 @@ interface ReportAttributes {
   purchased_electricity?: number;
   purchased_chilled_water?: number;
 
-  A3_paper_consumption?: number;
-  A4_paper_consumption?: number;
   water_consumption?: number;
 
   scope_1_emissions?: number;
@@ -73,8 +72,6 @@ export class Report
   declare purchased_electricity?: number;
   declare purchased_chilled_water?: number;
 
-  declare A3_paper_consumption?: number;
-  declare A4_paper_consumption?: number;
   declare water_consumption?: number;
 
   declare scope_1_emissions?: number;
@@ -94,6 +91,7 @@ export class Report
   declare generators?: Generator[];
   declare refrigerants?: RefrigerantUsage[];
   declare wastes?: WasteUsage[];
+  declare papers?: PaperUsage[];
 
   static associate(models: any) {
     Report.hasMany(models.Generator, {
@@ -107,6 +105,10 @@ export class Report
     Report.hasMany(models.WasteUsage, {
       foreignKey: "report_id",
       as: "wastes",
+    });
+    Report.hasMany(models.PaperUsage, {
+      foreignKey: "report_id",
+      as: "papers",
     });
     // Report.hasMany(models.Fuel, {
     //   foreignKey: "fuel_id",
@@ -216,14 +218,6 @@ export default (sequelize: Sequelize) => {
         allowNull: true,
       },
 
-      A3_paper_consumption: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      A4_paper_consumption: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
       water_consumption: {
         type: DataTypes.FLOAT,
         allowNull: true,

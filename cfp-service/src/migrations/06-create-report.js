@@ -70,15 +70,6 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: true,
       },
-
-      A3_paper_consumption: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      A4_paper_consumption: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
       water_consumption: {
         type: Sequelize.FLOAT,
         allowNull: true,
