@@ -31,7 +31,7 @@ router.post(
   validateBody(otpResendSchema, false),
   AuthController.resendOTP
 );
-// router.post("/refresh", AuthController.refresh);
+router.post("/refresh", AuthController.refresh);
 router.post("/log-out", AuthController.logOut);
 
 router.get(
