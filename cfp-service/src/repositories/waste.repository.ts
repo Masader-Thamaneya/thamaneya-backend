@@ -1,8 +1,8 @@
 import db from "../models";
 import {
-  WasteType,
-  WasteTypeCreationAttributes,
-} from "../models/wasteType.model";
+  Waste as WasteType,
+  WasteCreationAttributes,
+} from "../models/waste.model";
 import wasteEmissionFactorModel, {
   WasteEmissionFactor as WasteEmissionFactorType,
 } from "../models/wasteEmissionFactor.model";
@@ -16,7 +16,7 @@ import {
 import { Op, UniqueConstraintError } from "sequelize";
 import { ConflictError } from "../utils/errorMessages";
 
-const Waste = db.WasteType as typeof WasteType;
+const Waste = db.Waste as typeof WasteType;
 const WasteEmissionFactor =
   db.wasteEmissionFactor as typeof WasteEmissionFactorType;
 const WasteUsage = db.WasteUsage as typeof WasteUsageType;

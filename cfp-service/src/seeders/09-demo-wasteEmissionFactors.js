@@ -5,7 +5,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     // Map of waste_type name → ID (assuming you’ve seeded waste_types first)
     const wasteTypes = await queryInterface.sequelize.query(
-      `SELECT id, name FROM waste_types;`,
+      `SELECT id, name FROM wastes;`,
       { type: Sequelize.QueryTypes.SELECT }
     );
 
@@ -115,12 +115,12 @@ module.exports = {
 
     const records = dataKg
       .map(([wasteName, treatment, efKg]) => ({
-        waste_type_id: wasteTypeMap[wasteName],
+        waste_id: wasteTypeMap[wasteName],
         treatment,
         unit_id: unitId,
         ef: parseFloat((efKg / 1000).toFixed(6)),
       }))
-      .filter((e) => e.waste_type_id); // only keep records with valid waste_type_id
+      .filter((e) => e.waste_id); // only keep records with valid waste_type_id
 
     await queryInterface.bulkInsert("emission_factor_waste", records);
   },

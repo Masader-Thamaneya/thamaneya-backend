@@ -49,9 +49,7 @@ module.exports = {
       gas_id: gasMap[name],
       unit_id: unitId,
       year,
-      ef,
-      created_at: new Date(),
-      updated_at: new Date(),
+      ef, 
     }));
 
     await queryInterface.bulkInsert("emission_factor_refrigerants", rows);

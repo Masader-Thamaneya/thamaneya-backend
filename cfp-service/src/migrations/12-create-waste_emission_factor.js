@@ -9,11 +9,11 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      waste_type_id: {
+      waste_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "waste_types",
+          model: "wastes",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -44,11 +44,11 @@ module.exports = {
       },
     });
 
-    await queryInterface.addIndex("emission_factor_waste", ["waste_type_id"]);
+    await queryInterface.addIndex("emission_factor_waste", ["waste_id"]);
     await queryInterface.addIndex("emission_factor_waste", ["treatment"]);
     await queryInterface.addIndex(
       "emission_factor_waste",
-      ["waste_type_id", "treatment"],
+      ["waste_id", "treatment"],
       {
         unique: true,
         name: "unique_waste_treatment",

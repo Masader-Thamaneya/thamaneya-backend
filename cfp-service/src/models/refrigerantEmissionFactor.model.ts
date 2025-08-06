@@ -7,8 +7,6 @@ interface RefrigerentEmissionFactorAttributes {
   unit_id: number;
   year: number;
   ef: number;
-  created_at?: Date;
-  updated_at?: Date;
 }
 
 export type RefrigerentEmissionFactorCreationAttributes = Omit<
@@ -70,7 +68,7 @@ export default (sequelize: Sequelize) => {
       sequelize,
       modelName: "RefrigerantEmissionFactor",
       tableName: "emission_factor_refrigerants",
-      timestamps: true,
+      timestamps: false,
       underscored: true,
       indexes: [
         { fields: ["gas_id"] },

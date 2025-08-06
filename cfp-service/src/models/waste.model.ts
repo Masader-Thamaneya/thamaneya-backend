@@ -1,19 +1,16 @@
 ("use strict");
 import { Model, Sequelize, DataTypes } from "sequelize";
 
-interface WasteTypeAttributes {
+interface WasteAttributes {
   id?: number;
   name: string;
   name_ar: string;
   treatments: string[];
 }
 
-export type WasteTypeCreationAttributes = Omit<WasteTypeAttributes, "id">;
+export type WasteCreationAttributes = Omit<WasteAttributes, "id">;
 
-export class WasteType
-  extends Model<WasteTypeAttributes>
-  implements WasteTypeAttributes
-{
+export class Waste extends Model<WasteAttributes> implements WasteAttributes {
   declare name: string;
   declare name_ar: string;
   declare treatments: string[];
@@ -22,7 +19,7 @@ export class WasteType
 }
 
 export default (sequelize: Sequelize) => {
-  WasteType.init(
+  Waste.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -47,11 +44,11 @@ export default (sequelize: Sequelize) => {
     },
     {
       sequelize,
-      modelName: "WasteType",
-      tableName: "waste_types",
+      modelName: "Waste",
+      tableName: "wastes",
       timestamps: false,
     }
   );
 
-  return WasteType;
+  return Waste;
 };

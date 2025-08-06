@@ -3,7 +3,7 @@ import { Model, Sequelize, DataTypes } from "sequelize";
 
 interface WasteEmissionFactorAttributes {
   id?: number;
-  waste_type_id: number;
+  waste_id: number;
   treatment: "Recycled" | "Combustion" | "Composting" | "Landfill";
   unit_id: number;
   ef: number;
@@ -21,14 +21,14 @@ export class WasteEmissionFactor
   >
   implements WasteEmissionFactorAttributes
 {
-  declare waste_type_id: number;
+  declare waste_id: number;
   declare treatment: "Recycled" | "Combustion" | "Composting" | "Landfill";
   declare unit_id: number;
   declare ef: number;
 
   static associate(models: any) {
-    WasteEmissionFactor.belongsTo(models.WasteType, {
-      foreignKey: "waste_type_id",
+    WasteEmissionFactor.belongsTo(models.Waste, {
+      foreignKey: "waste_id",
       as: "waste",
     });
   }
@@ -42,7 +42,7 @@ export default (sequelize: Sequelize) => {
         autoIncrement: true,
         primaryKey: true,
       },
-      waste_type_id: {
+      waste_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },

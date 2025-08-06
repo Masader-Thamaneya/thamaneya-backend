@@ -211,10 +211,10 @@ module.exports = {
       treatments: JSON.stringify(wt.treatments),
     }));
 
-    await queryInterface.bulkInsert("waste_types", data);
+    await queryInterface.bulkInsert("wastes", data);
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("waste_types", null, {});
+    await queryInterface.bulkDelete("wastes", null, {});
   },
 };
