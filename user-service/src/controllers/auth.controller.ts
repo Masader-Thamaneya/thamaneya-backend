@@ -11,7 +11,7 @@ class AuthController {
         email,
         password
       );
-      attachRefreshToken(res, refreshToken);
+      // attachRefreshToken(res, refreshToken);
 
       return res.status(200).json({
         success: true,
@@ -46,7 +46,7 @@ class AuthController {
 
   static async logOut(req: Request, res: Response, next: NextFunction) {
     try {
-      deleteRefreshToken(res);
+      // deleteRefreshToken(res);
 
       res.status(200).json({
         success: true,
@@ -64,7 +64,7 @@ class AuthController {
         email,
         otp
       );
-      attachRefreshToken(res, refreshToken);
+      // attachRefreshToken(res, refreshToken);
       return res.status(200).json({
         success: true,
         message: "Email successfully verified.",

@@ -4,12 +4,9 @@ import { string } from "joi";
 
 class ReportsController {
   static async createReport(req: Request, res: Response, next: NextFunction) {
-    const { companyId, userId } = req.user!; // TODO: change to req.user
+    const { companyId, userId } = req.user!;
     try {
-      const reportId = await ReportService.createReport(
-        String(userId),
-        String(companyId)
-      );
+      const reportId = await ReportService.createReport(userId, companyId);
 
       return res.status(201).json({
         success: true,
@@ -62,7 +59,7 @@ class ReportsController {
 
   static async submitReport(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
-    const { userId, companyId } = req.user!; // TODO: change to req.user
+    const { userId, companyId } = req.user!;
     const { data } = req.body;
     try {
       let totalEmissions = 0;
