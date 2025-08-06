@@ -18,7 +18,7 @@ import { ConflictError } from "../utils/errorMessages";
 
 const Waste = db.Waste as typeof WasteType;
 const WasteEmissionFactor =
-  db.wasteEmissionFactor as typeof WasteEmissionFactorType;
+  db.WasteEmissionFactor as typeof WasteEmissionFactorType;
 const WasteUsage = db.WasteUsage as typeof WasteUsageType;
 
 class WasteRepository {
