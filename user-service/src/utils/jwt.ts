@@ -17,7 +17,7 @@ if (!accessSecretKey || !refreshSecretKey) {
 }
 
 export const createAccessToken = (JwtPayload: JwtPayload) => {
-  const token = jwt.sign(JwtPayload, accessSecretKey, { expiresIn: "15m" });
+  const token = jwt.sign(JwtPayload, accessSecretKey, { expiresIn: "2h" });
   return token;
 };
 
