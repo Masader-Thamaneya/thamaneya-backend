@@ -294,7 +294,7 @@ const cat5Emissions = async (report: ReportType) => {
   const wasteEmissions = await Promise.all(
     report.wastes.map(async (waste) => {
       const factor = await Waste.findEmissionFactor({
-        gas_id: waste.waste_id,
+        waste_id: waste.waste_id,
         unit_id: waste.unit_id,
         treatment: waste.treatment,
       });
