@@ -1,10 +1,6 @@
 "use strict";
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    const gases = [
-      {
+/* {
         name: "Carbon dioxide",
         name_ar: "ثاني أكسيد الكربون",
       },
@@ -35,6 +31,47 @@ module.exports = {
       {
         name: "CFC-13",
         name_ar: "CFC-13",
+      }, */
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    const gases = [
+      {
+        name: "R12",
+        name_ar: "R12",
+      },
+      {
+        name: "R22",
+        name_ar: "R22",
+      },
+      {
+        name: "R32",
+        name_ar: "R32",
+      },
+      {
+        name: "R34",
+        name_ar: "R34",
+      },
+      {
+        name: "R123",
+        name_ar: "R123",
+      },
+      {
+        name: "R134A",
+        name_ar: "R134A",
+      },
+      {
+        name: "R404",
+        name_ar: "R404",
+      },
+      {
+        name: "R407A",
+        name_ar: "R407A",
+      },
+      {
+        name: "R410A",
+        name_ar: "R410A",
       },
     ];
 

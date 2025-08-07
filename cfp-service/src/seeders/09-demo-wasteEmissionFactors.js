@@ -1,28 +1,7 @@
 "use strict";
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    // Map of waste_type name → ID (assuming you’ve seeded waste_types first)
-    const wasteTypes = await queryInterface.sequelize.query(
-      `SELECT id, name FROM wastes;`,
-      { type: Sequelize.QueryTypes.SELECT }
-    );
-
-    const units = await queryInterface.sequelize.query(
-      `SELECT id FROM units WHERE name = 'tonnes' LIMIT 1;`,
-      { type: Sequelize.QueryTypes.SELECT }
-    );
-    const unitId = units[0]?.id;
-
-    const wasteTypeMap = {};
-    for (const wt of wasteTypes) {
-      wasteTypeMap[wt.name] = wt.id;
-    }
-
-    // Data: [wasteTypeName, treatment, kgCO2e]
-    const dataKg = [
-      ["Aggregates", "Recycled", 0.98485],
+/* 
+["Aggregates", "Recycled", 0.98485],
       ["Aggregates", "Landfill", 1.23393],
       ["Average construction", "Recycled", 0.98485],
       ["Average construction", "Combustion", 6.41061],
@@ -111,6 +90,38 @@ module.exports = {
       ["Paper and board: paper", "Combustion", 6.41061],
       ["Paper and board: paper", "Composting", 8.88386],
       ["Paper and board: paper", "Landfill", 1164.39015],
+       */
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    // Map of waste_type name → ID (assuming you’ve seeded waste_types first)
+    const wasteTypes = await queryInterface.sequelize.query(
+      `SELECT id, name FROM wastes;`,
+      { type: Sequelize.QueryTypes.SELECT }
+    );
+
+    const units = await queryInterface.sequelize.query(
+      `SELECT id FROM units WHERE name = 'tonnes' LIMIT 1;`,
+      { type: Sequelize.QueryTypes.SELECT }
+    );
+    const unitId = units[0]?.id;
+
+    const wasteTypeMap = {};
+    for (const wt of wasteTypes) {
+      wasteTypeMap[wt.name] = wt.id;
+    }
+
+    // Data: [wasteTypeName, treatment, kgCO2e]
+    const dataKg = [
+      ["Paper and Cardboard", "Recycled", 6.41061],
+      ["Paper and Cardboard", "Landfill", 1164.39015],
+      ["Plastics", "Recycled", 6.41061],
+      ["Plastics", "Landfill", 8.88386],
+      ["Metals", "Recycled", 6.41061],
+      ["Metals", "Landfill", 8.88386],
+      ["Glass", "Recycled", 6.41061],
+      ["Glass", "Landfill", 8.88386],
     ];
 
     const records = dataKg

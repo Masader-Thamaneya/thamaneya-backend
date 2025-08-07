@@ -1,10 +1,6 @@
 "use strict";
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    const wasteTypes = [
-      {
+/* {
         name: "Aggregates",
         name_ar: "الركام",
         treatments: ["Recycled", "Landfill"],
@@ -203,6 +199,30 @@ module.exports = {
         name: "Paper and board: paper",
         name_ar: "ورق وكرتون: ورق",
         treatments: ["Recycled", "Combustion", "Composting", "Landfill"],
+      }, */
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    const wasteTypes = [
+      {
+        name: "Paper and Cardboard",
+        name_ar: "ورق وكرتون",
+        treatments: ["Recycled", "Landfill"],
+      },
+      {
+        name: "Plastics",
+        name_ar: "بلاستيكات",
+        treatments: ["Recycled", "Landfill"],
+      },
+      {
+        name: "Metals",
+        name_ar: "المعادن",
+        treatments: ["Recycled", "Landfill"],
+      },
+      {
+        name: "Glass",
+        name_ar: "الزجاج",
+        treatments: ["Recycled", "Landfill"],
       },
     ];
     const data = wasteTypes.map((wt) => ({

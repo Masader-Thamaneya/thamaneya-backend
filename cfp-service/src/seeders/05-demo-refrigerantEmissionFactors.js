@@ -1,10 +1,7 @@
 "use strict";
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    const gasesRaw = [
-      [2022, "Carbon dioxide", "kg", 1, 0.001],
+/* 
+[2022, "Carbon dioxide", "kg", 1, 0.001],
       [2023, "Carbon dioxide", "kg", 1, 0.001],
       [2024, "Carbon dioxide", "kg", 1, 0.001],
       [2022, "Carbon tetrachloride", "kg", 1400, 1.4],
@@ -28,6 +25,47 @@ module.exports = {
       [2022, "CFC-13", "kg", 14400, 14.4],
       [2023, "CFC-13", "kg", 13900, 13.9],
       [2024, "CFC-13", "kg", 13900, 13.9],
+       */
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    const gasesRaw = [
+      [2022, "R12", "kg", 10900, 10.9],
+      [2023, "R12", "kg", 10200, 10.2],
+      [2024, "R12", "kg", 10200, 10.2],
+
+      [2022, "R22", "kg", 1810, 1.81],
+      [2023, "R22", "kg", 1760, 1.76],
+      [2024, "R22", "kg", 1760, 1.76],
+
+      [2022, "R32", "kg", 1000, 1],
+      [2023, "R32", "kg", 1000, 1],
+      [2024, "R32", "kg", 1000, 1],
+
+      [2022, "R34", "kg", 1000, 1],
+      [2023, "R34", "kg", 1000, 1],
+      [2024, "R34", "kg", 1000, 1],
+
+      [2022, "R123", "kg", 1000, 1],
+      [2023, "R123", "kg", 1000, 1],
+      [2024, "R123", "kg", 1000, 1],
+
+      [2022, "R134A", "kg", 1000, 1],
+      [2023, "R134A", "kg", 1000, 1],
+      [2024, "R134A", "kg", 1000, 1],
+
+      [2022, "R404", "kg", 1000, 1],
+      [2023, "R404", "kg", 1000, 1],
+      [2024, "R404", "kg", 1000, 1],
+
+      [2022, "R407A", "kg", 2107, 2.107],
+      [2023, "R407A", "kg", 1923, 1.923],
+      [2024, "R407A", "kg", 1923, 1.923],
+
+      [2022, "R410A", "kg", 2088, 2.088],
+      [2023, "R410A", "kg", 1924, 1.924],
+      [2024, "R410A", "kg", 1924, 1.924],
     ];
 
     // Fetch gas IDs
@@ -49,7 +87,7 @@ module.exports = {
       gas_id: gasMap[name],
       unit_id: unitId,
       year,
-      ef, 
+      ef,
     }));
 
     await queryInterface.bulkInsert("emission_factor_refrigerants", rows);
