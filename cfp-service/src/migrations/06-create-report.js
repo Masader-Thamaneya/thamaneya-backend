@@ -11,7 +11,7 @@ module.exports = {
       },
       company_id: {
         type: Sequelize.UUID,
-        allowNull: false,
+        allowNull: true, // Change in production
       },
       created_by: {
         type: Sequelize.UUID,

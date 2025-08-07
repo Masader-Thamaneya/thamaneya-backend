@@ -7,7 +7,7 @@ import { PaperUsage } from "./paperUsage.model";
 
 interface ReportAttributes {
   id?: string;
-  company_id: string;
+  company_id?: string;
   created_by: string;
   status?:
     | "draft"
@@ -51,7 +51,7 @@ export class Report
   extends Model<ReportAttributes, ReportCreationAttributes>
   implements ReportAttributes
 {
-  declare company_id: string;
+  declare company_id?: string;
   declare created_by: string;
   declare status:
     | "draft"
@@ -158,7 +158,7 @@ export default (sequelize: Sequelize) => {
       },
       company_id: {
         type: DataTypes.UUID,
-        allowNull: false,
+        allowNull: true, // Change in production
       },
       created_by: {
         type: DataTypes.UUID,
